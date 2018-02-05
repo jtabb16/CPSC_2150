@@ -29,17 +29,14 @@ public class Customer {
      * @param [score is credit score]
      * @param [n is name]
      * @requires 0<= credit <= 850 and debt >= 0 and income >= 0 and name != ""
-     * @ensures debt = debt and income = inc and score = score and name = n
+     * @ensures monthly debt payments = debt and income = inc and score = score and name = n
      */
     Customer( double debt, double inc, int score, String n)
     {
-
-        /*
-        Set the monthly debt payments, income, credit score and name
-        Credit scores range from 0 - 850
-         */
-
-
+        monthlyDebtPayments = debt;
+        income = inc;
+        creditScore = score;
+        name = n;
     }
 
     /**
@@ -54,9 +51,8 @@ public class Customer {
      */
     public boolean applyForLoan(double downPayment, double houseCost, int years)
     {
-        //Take the parameters and apply for a loan. Save the loan details as the customers current loan
-        // Return whether or not the loan was approved
-        return true;
+        loan = new Mortgage(houseCost, downPayment, years, this);
+        return loan.loanApproved();
 
     }
 
@@ -67,8 +63,7 @@ public class Customer {
      */
     public double getRate()
     {
-        //return the interest rate on the current loan
-        return 0;
+        return loan.getRate();
     }
     /**
      * @requires monthly pay > 0
@@ -77,8 +72,7 @@ public class Customer {
      */
     public double getMonthlyPay()
     {
-        //return the monthly payment on the current loan
-        return 0;
+        return loan.getPayment();
     }
 
     /**
@@ -88,8 +82,7 @@ public class Customer {
      */
     public double getMonthlyDebtPayments()
     {
-        //return the customers monthly debt payments
-        return 0;
+        return monthlyDebtPayments;
     }
     /**
      * @requires income > 0
@@ -98,8 +91,7 @@ public class Customer {
      */
     public double getIncome()
     {
-        //return the customers income
-        return 0;
+        return income;
     }
     /**
      * @requires monthly debt payments > 0
@@ -108,8 +100,7 @@ public class Customer {
      */
     public int getCreditScore()
     {
-        //return the customers credit score
-        return 0;
+        return creditScore;
     }
 
 

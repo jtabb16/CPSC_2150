@@ -37,14 +37,18 @@ public class Mortgage {
      *           and [cust is a complete customer object]
      * @ensures house cost = cost, down payment = dp, years to pay mortgage = y,
      *          and customer this mortgage applies to is cust
+     *          and percentDown = (dp / cost) * 100;
      */
     Mortgage(double cost, double dp, int y, Customer cust)
     {
+        houseCost = cost;
+        downPayment = dp;
+        years = y;
+        customer = cust;
 
-
-        /*
-        Sets the house cost, down payment, years and customer. Calculates the percent down, rate, and payment
-         */
+        percentDown = (dp / cost) * 100;
+        calcRate();
+        calcPayment();
     }
 
     /**
@@ -77,7 +81,40 @@ public class Mortgage {
         Excellent     | 750 - 850    | 0%
         If the down payment is less than 20% of the price of the house, add .5%
          */
+        double baseRate = 0.025;
+        double additionalRate = 0;
+        int credit = customer.getCreditScore();
 
+        if((credit > 750) && (credit < 850)){
+            additionalRate = 0;
+        }
+        else if((credit > 700) && (credit < 749)){
+            additionalRate = 0.005;
+        }
+        else if((credit > 600) && (credit < 699)){
+            additionalRate = 0.01;
+        }
+        else if((credit > 500) && (credit < 599)){
+            additionalRate = 0.05;
+        }
+        else if((credit > 0) && (credit < 500)){
+            additionalRate = 0.1;
+        }
+
+
+
+        if(years == 30){
+            interestRate = baseRate + 0.01 + additionalRate;
+        }
+        else if(years < 30){
+            interestRate = baseRate + 0.005 + additionalRate;
+        }
+
+
+
+        if(downPayment < (0.2 * houseCost)){
+        interestRate += interestRate + 0.005;
+        }
 
     }
 
@@ -93,6 +130,12 @@ public class Mortgage {
      */
     private void calcPayment()
     {
+        double r = interestRate / 12;
+        double p = houseCost - downPayment;
+        double n = years * 12; //Assuming 12 months in one year
+
+        payment = ( (r*p) / (1-Math.pow((1+r), (-n))) );
+
         /*
         Calculate the monthly payment
         terms:
@@ -127,7 +170,11 @@ public class Mortgage {
         The debt to income ratio is the total monthly debt payments (including the mortgage payment) / monthly income
         Otherwise the loan is approved
          */
+        int totalMonthPayment = years * 12;
 
+        if((interestRate >= .1) || (downPayment < (0.035 * houseCost)) || (totalMonthPayment / customer.getIncome() > .4)){
+            return false;
+        }
         return true;
     }
 
@@ -139,7 +186,7 @@ public class Mortgage {
     public double getPayment()
     {
         //return the monthly payment on the loan
-        return 0;
+        return payment;
     }
 
     /**
@@ -150,7 +197,7 @@ public class Mortgage {
     public double getRate()
     {
         //return the interest rate on the loan
-        return 0;
+        return interestRate;
     }
 
     /**
