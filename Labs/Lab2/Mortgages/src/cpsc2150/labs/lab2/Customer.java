@@ -53,7 +53,6 @@ public class Customer {
     {
         loan = new Mortgage(houseCost, downPayment, years, this);
         return loan.loanApproved();
-
     }
 
     /**
@@ -120,9 +119,10 @@ public class Customer {
         str += "Credit Score: " + creditScore + "\n";
         str += "Monthly Debt: $" + monthlyDebtPayments + "\n";
         str += "Mortgage info: \n";
-        //str += loan.toString();
+        if (loan != null) {
+            str += loan.toString();
+        }
 
         return str;
-
     }
 }

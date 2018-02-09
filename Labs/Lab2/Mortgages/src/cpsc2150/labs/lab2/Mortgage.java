@@ -85,19 +85,19 @@ public class Mortgage {
         double additionalRate = 0;
         int credit = customer.getCreditScore();
 
-        if((credit > 750) && (credit < 850)){
+        if((credit >= 750) && (credit <= 850)){
             additionalRate = 0;
         }
-        else if((credit > 700) && (credit < 749)){
+        else if((credit >= 700) && (credit <= 749)){
             additionalRate = 0.005;
         }
-        else if((credit > 600) && (credit < 699)){
+        else if((credit >= 600) && (credit <= 699)){
             additionalRate = 0.01;
         }
-        else if((credit > 500) && (credit < 599)){
+        else if((credit >= 500) && (credit <= 599)){
             additionalRate = 0.05;
         }
-        else if((credit > 0) && (credit < 500)){
+        else if((credit >= 0) && (credit < 500)){
             additionalRate = 0.1;
         }
 
@@ -106,16 +106,15 @@ public class Mortgage {
         if(years == 30){
             interestRate = baseRate + 0.01 + additionalRate;
         }
-        else if(years < 30){
+        else if( (years == 15) || (years == 20) || (years == 25) ){
             interestRate = baseRate + 0.005 + additionalRate;
         }
 
 
 
         if(downPayment < (0.2 * houseCost)){
-        interestRate += interestRate + 0.005;
+            interestRate += + 0.005;
         }
-
     }
 
     /**
@@ -163,6 +162,7 @@ public class Mortgage {
      */
     public boolean loanApproved()
     {
+        boolean approved = true;
         /*
         If the intereset rate is too high (10% or higher) the loan is denied
         If the down payment is less than 3.5% of the price of the house then the loan is denied
@@ -170,12 +170,14 @@ public class Mortgage {
         The debt to income ratio is the total monthly debt payments (including the mortgage payment) / monthly income
         Otherwise the loan is approved
          */
-        int totalMonthPayment = years * 12;
 
-        if((interestRate >= .1) || (downPayment < (0.035 * houseCost)) || (totalMonthPayment / customer.getIncome() > .4)){
-            return false;
+        double totalMonthPayment = customer.getMonthlyDebtPayments() + payment;
+
+        //Note: The customer.getIncome() returns a whole year's income. We want only one month's income.
+        if((interestRate >= .1) || (downPayment < (0.035 * houseCost)) || (totalMonthPayment / (customer.getIncome() / 12) > .4)){
+            approved = false;
         }
-        return true;
+        return approved;
     }
 
     /**
