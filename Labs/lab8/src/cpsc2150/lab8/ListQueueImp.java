@@ -1,16 +1,14 @@
 package cpsc2150.lab8;
 
 import java.util.*;
-
 /**
  * Sangram Kadam (sangrak)
  * Jack Tabb (jbtabb)
- * Lab 7
+ * CPSC 2150
+ * Lab 8
+ * 3/27/2018
  * Kevin Plis
- * 3/15/2018
- * Cpsc 2150
  */
-
 
 /**
  * Correspondence: this = myQ. The front of myQ is the front of
@@ -36,12 +34,12 @@ public class ListQueueImp implements IntegerQueueI {
     public void add(Integer x){
 
         //adds to the end of list
-        myQ.add(x);
+        ((LinkedList<Integer>)myQ).addFirst(x);
     }
     public Integer pop() {
 
         //removes first element from linked list
-        return myQ.remove(0);
+        return ((LinkedList<Integer>)myQ).removeLast();
     }
     public int size() {
 
@@ -65,14 +63,10 @@ public class ListQueueImp implements IntegerQueueI {
         Object [] myQContents = myQ.toArray();
 
         //loops through myQ from last element to first and prints elements to the screen
-        for(int i = myQ.size() - 1; i > 0; i--){
+        for(int i = myQ.size() - 1; i >= 0; i--){
             str += (Integer)myQContents[i] + "\n";
         }
-
         return str;
-
     }
-
-
 }
 

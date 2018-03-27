@@ -2,7 +2,12 @@ package cpsc2150.lab8;
 
 import java.util.Scanner;
 /**
- * Created by sangrak on 3/26/2018.
+ * Sangram Kadam (sangrak)
+ * Jack Tabb (jbtabb)
+ * CPSC 2150
+ * Lab 8
+ * 3/27/2018
+ * Kevin Plis
  */
 public class IntegerQueueApp {
     private static Scanner in;
@@ -112,10 +117,10 @@ public class IntegerQueueApp {
         do{
             System.out.println("What position to insert in?");
             answer2 = in.nextInt();
-            if((answer2 < 0) || (answer2 > iQueue.size() + 1)) {
+            if((answer2 <= 0) || (answer2 > iQueue.size() + 1)) {
                 System.out.println("Not a valid position in the Queue!");
             }
-        }while((answer2 < 0) || (answer2 > iQueue.size() + 1));
+        }while((answer2 <= 0) || (answer2 > iQueue.size() + 1));
 
         iQueue.insert(answer, answer2);
     }
@@ -129,10 +134,10 @@ public class IntegerQueueApp {
             do{
                 System.out.println("What position to get from the Queue?");
                 answer = in.nextInt();
-                if((answer < 0) ||(answer > iQueue.size())) {
+                if((answer <= 0) ||(answer > iQueue.size())) {
                     System.out.println("Not a valid position in the Queue!");
                 }
-            }while((answer < 0) ||(answer > iQueue.size()));
+            }while((answer <= 0) ||(answer > iQueue.size()));
             System.out.println(iQueue.get(answer) + " is at position " + answer + " in the queue");
         }
     }
@@ -145,11 +150,10 @@ public class IntegerQueueApp {
             do{
                 System.out.println("What position to remove from the Queue?");
                 answer = in.nextInt();
-                //System.out.println("Answer is: " + answer);
-                if((answer < 0) ||(answer > iQueue.size())) {
+                if((answer <= 0) ||(answer > iQueue.size())) {
                     System.out.println("Not a valid position in the Queue!");
                 }
-            }while((answer < 0) || (answer > iQueue.size()));
+            }while((answer <= 0) || (answer > iQueue.size()));
             System.out.println(iQueue.remove(answer) + " was at position " + answer + " in the queue");
         }
     }

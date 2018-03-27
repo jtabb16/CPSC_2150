@@ -1,12 +1,11 @@
 package cpsc2150.lab8;
-
 /**
  * Sangram Kadam (sangrak)
  * Jack Tabb (jbtabb)
- * Lab 7
+ * CPSC 2150
+ * Lab 8
+ * 3/27/2018
  * Kevin Plis
- * 3/15/2018
- * Cpsc 2150
  */
 
 public interface IntegerQueueI {
@@ -55,7 +54,8 @@ public interface IntegerQueueI {
      * @return [integer at the front of the queue]
      */
     default Integer peek(){
-        //Array to temporarily hold the elements that get removed from the queue while traversing to the end of the queue
+        //Array to temporarily hold the elements that get removed from the queue while traversing to the end of the
+        //queue
         Integer [] tempArr = new Integer[size()];
         Integer result;
         //Get the number of elements in the queue before modifying it
@@ -83,7 +83,8 @@ public interface IntegerQueueI {
      */
     default Integer endOfQueue(){
 
-        //Array to temporarily hold the elements that get removed from the queue while traversing to the end of the queue
+        //Array to temporarily hold the elements that get removed from the queue while traversing to the end of the
+        //queue
         Integer [] tempArr = new Integer[size()];
         Integer result;
         //Get the number of elements in the queue before modifying it
@@ -113,10 +114,11 @@ public interface IntegerQueueI {
      */
     default void insert(Integer x, int pos){
 
-        //Array to temporarily hold the elements that get removed from the queue while traversing to the end of the queue
+        //Array to temporarily hold the elements that get removed from the queue while traversing to the end of the
+        //queue
         Integer [] tempArr = new Integer[size()];
-        //Array to temporarily hold the elements that get removed from the queue while traversing to the end of the queue
-        //      and the added element in its correct position
+        //Array to temporarily hold the elements that get removed from the queue while traversing to the end of the
+        //queue and the added element in its correct position
         Integer [] tempArr2 = new Integer[size() + 1];
         Integer size = size(); //Get number of elements in the queue
 
@@ -148,7 +150,7 @@ public interface IntegerQueueI {
     /**
      * @param pos is the index in the queue where the Integer will be removed
      * @requires pos = 1 [at the very front of the queue] and [pos increases as you go from the front to end of queue]
-     *           and 0 < pos <= size
+     *           and 1 <= pos <= size
      * @ensures [Integer is removed from pos] and [Integer value is returned]
      * @return [Integer value that was removed is returned]
      */
@@ -165,7 +167,6 @@ public interface IntegerQueueI {
 
         }
 
-        //result = tempArr[size - pos];
         result = tempArr[size - pos];
 
         //starting from index of element to be removed, add all elements that come after the element to be removed. This
@@ -184,7 +185,7 @@ public interface IntegerQueueI {
     /**
      * @param pos is the index in the queue of the Integer whose value will be returned
      * @requires pos = 1 [at the very front of the queue] and [pos increases as you go from the front to end of queue]
-     *            and 0 < pos <= size
+     *            and 1 <= pos <= size
      * @ensures [Integer value at pos is returned] and [queue is not modified]
      * @return [Integer value at pos is returned]
      */
@@ -201,7 +202,6 @@ public interface IntegerQueueI {
 
         }
 
-        //result = tempArr[size - pos];
         result = tempArr[size - pos];
 
         //add elements back to queue
@@ -212,4 +212,3 @@ public interface IntegerQueueI {
         return result;
     }
 }
-

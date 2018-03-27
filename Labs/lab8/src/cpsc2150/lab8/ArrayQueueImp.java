@@ -1,5 +1,13 @@
 package cpsc2150.lab8;
 
+/**
+ * Sangram Kadam (sangrak)
+ * Jack Tabb (jbtabb)
+ * CPSC 2150
+ * Lab 8
+ * 3/27/2018
+ * Kevin Plis
+ */
 
 /**
  * Correspondence: this = myQ[0...depth-1], myQ[0] is the front
@@ -13,29 +21,18 @@ public class ArrayQueueImp implements IntegerQueueI {
     private int depth;
     //complete the class
 
-
-    /**
-     * Sangram Kadam (sangrak)
-     * Jack Tabb (jbtabb)
-     * Lab 7
-     * Kevin Plis
-     * 3/15/2018
-     * Cpsc 2150
-     */
-
     public ArrayQueueImp(){
         depth = 10;
 
-        myQ = new Integer[depth];
-
         //Each Integer in the queue is initialized to null to make an "empty" queue
+        myQ = new Integer[depth];
     }
     public void add(Integer x){
         Integer[] newMyQ;
 
         int numElem = 0;
 
-        ///Count how many elements are in the queue
+        //Count how many elements are in the queue
         for(Integer i: myQ){
             if (i != null)
             {
@@ -138,16 +135,6 @@ public class ArrayQueueImp implements IntegerQueueI {
             }
         }
 
-
         return str;
-
     }
-
-
 }
-
-
-
-
-
-
